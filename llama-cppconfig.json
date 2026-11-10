@@ -1,21 +1,57 @@
 [
     {
-        "DisplayName": "Model File Path",
+        "DisplayName": "Model Source",
         "Category": "Model Configuration",
-        "Subcategory": "Model Settings:box",
-        "Description": "Path to the .gguf model file relative to root or absolute (e.g. models/gemma4-turbo.gguf)",
-        "Keywords": "model,gguf,path,file,weights",
-        "FieldName": "ModelFile",
-        "InputType": "text",
-        "ParamFieldName": "ModelFile",
+        "Subcategory": "Model Selection:box",
+        "Description": "Choose a curated Hugging Face model or select Custom to specify your own repository/tag.",
+        "Keywords": "model,source,huggingface,ollama,gemma,turbo",
+        "FieldName": "ModelSource",
+        "InputType": "enum",
+        "ParamFieldName": "ModelSource",
         "IncludeInCommandLine": false,
-        "DefaultValue": "models/model.gguf"
+        "DefaultValue": "--hf-repo ssfdre38/gemma4-turbo-gguf:IQ4_XS",
+        "EnumValues": {
+            "--hf-repo ssfdre38/gemma4-turbo-gguf:IQ4_XS": "Gemma 4 Turbo [31B IQ4_XS] - ssfdre38 (Recommended)",
+            "--hf-repo ssfdre38/gemma4-nano-gguf:IQ4_XS": "Gemma 4 Nano [IQ4_XS] - ssfdre38",
+            "--hf-repo Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:q4_k_m": "Qwen 2.5 Coder 7B (Q4_K_M)",
+            "--hf-repo unsloth/Llama-3.2-3B-Instruct-GGUF:q4_k_m": "Llama 3.2 3B Instruct (Q4_K_M)",
+            "--hf-repo bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M": "Llama 3.1 8B Instruct (Q4_K_M)",
+            "{{CustomModelFlag}} \"{{CustomModelTarget}}\"": "Custom Model (Use Custom Fields Below)"
+        }
+    },
+    {
+        "DisplayName": "Custom Model / Repo / Path",
+        "Category": "Model Configuration",
+        "Subcategory": "Model Selection:box",
+        "Description": "Enter a custom Hugging Face repo:quant (e.g. ssfdre38/gemma4-turbo-gguf:IQ4_XS) or local file path (e.g. models/model.gguf). NOTE: Set 'Model Source' above to 'Custom Model' when using this.",
+        "Keywords": "custom,repo,model,ollama,huggingface,path",
+        "FieldName": "CustomModelTarget",
+        "InputType": "text",
+        "ParamFieldName": "CustomModelTarget",
+        "IncludeInCommandLine": false,
+        "DefaultValue": "ssfdre38/gemma4-turbo-gguf:IQ4_XS"
+    },
+    {
+        "DisplayName": "Custom Model Type",
+        "Category": "Model Configuration",
+        "Subcategory": "Model Selection:box",
+        "Description": "Specify whether your Custom Model is a remote repository or a local GGUF file.",
+        "Keywords": "custom,type,flag,remote,local",
+        "FieldName": "CustomModelFlag",
+        "InputType": "enum",
+        "ParamFieldName": "CustomModelFlag",
+        "IncludeInCommandLine": false,
+        "DefaultValue": "--hf-repo",
+        "EnumValues": {
+            "--hf-repo": "Hugging Face / Ollama Repo (--hf-repo)",
+            "-m": "Local GGUF File Path (-m)"
+        }
     },
     {
         "DisplayName": "Context Size",
         "Category": "Model Configuration",
         "Subcategory": "Hardware & Performance:memory",
-        "Description": "Size of the prompt context window in tokens (e.g. 4096, 8192, 16384, 32768)",
+        "Description": "Size of the prompt context window in tokens (e.g. 4096, 8192, 16384, 32768).",
         "Keywords": "context,tokens,ctx,window",
         "FieldName": "ContextSize",
         "InputType": "numeric",
