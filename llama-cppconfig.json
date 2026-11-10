@@ -1,0 +1,74 @@
+[
+    {
+        "DisplayName": "Model File Path",
+        "Category": "Model Configuration",
+        "Subcategory": "Model Settings:box",
+        "Description": "Path to the .gguf model file relative to root or absolute (e.g. models/gemma4-turbo.gguf)",
+        "Keywords": "model,gguf,path,file,weights",
+        "FieldName": "ModelFile",
+        "InputType": "text",
+        "ParamFieldName": "ModelFile",
+        "IncludeInCommandLine": false,
+        "DefaultValue": "models/model.gguf"
+    },
+    {
+        "DisplayName": "Context Size",
+        "Category": "Model Configuration",
+        "Subcategory": "Hardware & Performance:memory",
+        "Description": "Size of the prompt context window in tokens (e.g. 4096, 8192, 16384, 32768)",
+        "Keywords": "context,tokens,ctx,window",
+        "FieldName": "ContextSize",
+        "InputType": "numeric",
+        "ParamFieldName": "ContextSize",
+        "IncludeInCommandLine": false,
+        "DefaultValue": 8192
+    },
+    {
+        "DisplayName": "GPU Layers Offload (-ngl)",
+        "Category": "Model Configuration",
+        "Subcategory": "Hardware & Performance:memory",
+        "Description": "Number of model layers to offload to GPU VRAM. Set to 0 for pure CPU inference, or 99 to offload all layers.",
+        "Keywords": "gpu,layers,vram,cuda,metal,vulkan,offload",
+        "FieldName": "GpuLayers",
+        "InputType": "numeric",
+        "ParamFieldName": "GpuLayers",
+        "IncludeInCommandLine": false,
+        "DefaultValue": 99
+    },
+    {
+        "DisplayName": "CPU Threads",
+        "Category": "Model Configuration",
+        "Subcategory": "Hardware & Performance:memory",
+        "Description": "Number of CPU threads to use for generation.",
+        "Keywords": "threads,cpu,cores",
+        "FieldName": "CpuThreads",
+        "InputType": "numeric",
+        "ParamFieldName": "CpuThreads",
+        "IncludeInCommandLine": false,
+        "DefaultValue": 8
+    },
+    {
+        "DisplayName": "Parallel Slots",
+        "Category": "Model Configuration",
+        "Subcategory": "Hardware & Performance:memory",
+        "Description": "Number of concurrent request slots to process in parallel.",
+        "Keywords": "slots,parallel,concurrent",
+        "FieldName": "ParallelSlots",
+        "InputType": "numeric",
+        "ParamFieldName": "ParallelSlots",
+        "IncludeInCommandLine": false,
+        "DefaultValue": 1
+    },
+    {
+        "DisplayName": "Custom Startup Arguments",
+        "Category": "Advanced",
+        "Subcategory": "Advanced:cogs",
+        "Description": "Additional command line arguments passed to llama-server (e.g. --flash-attn, --embedding, --metrics).",
+        "Keywords": "custom,args,flags,parameters",
+        "FieldName": "CustomArgs",
+        "InputType": "text",
+        "ParamFieldName": "CustomArgs",
+        "IncludeInCommandLine": false,
+        "DefaultValue": ""
+    }
+]

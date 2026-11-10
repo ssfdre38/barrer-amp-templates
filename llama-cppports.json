@@ -1,0 +1,9 @@
+[
+    {
+        "Protocol": "TCP",
+        "Port": 8080,
+        "Ref": "AppPort",
+        "Name": "Web Chat & API Port",
+        "Description": "Port for llama-server web chat UI and OpenAI-compatible API"
+    }
+]
