@@ -56,4 +56,4 @@ App.Compatibility=None
 App.SupportsUniversalSleep=False
 App.WakeupMode=Any
 App.ApplicationReadyMode=RegexMatch
-Console.AppReadyRegex=.*(HTTP server listening|main: server listening|all slots are idle).*
+Console.AppReadyRegex=.*(listening on http|model loaded|HTTP server listening|main: server listening|all slots are idle).*
