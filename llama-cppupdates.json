@@ -27,5 +27,23 @@
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullRootDir}}models",
         "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Ollama Model Pull (Windows)",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "RunCommand",
+        "UpdateSourceArgs": "pwsh.exe -ExecutionPolicy Bypass -File \"{{$FullRootDir}}pull-ollama.ps1\" -Model \"{{OllamaModel}}\" -OutputDir \"{{$FullRootDir}}models\"",
+        "UpdateSourceConditionSetting": "EnableOllamaPull",
+        "UpdateSourceConditionValue": "True",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "Ollama Model Pull (Linux)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "RunCommand",
+        "UpdateSourceArgs": "bash \"{{$FullRootDir}}pull-ollama.sh\" \"{{OllamaModel}}\" \"{{$FullRootDir}}models\"",
+        "UpdateSourceConditionSetting": "EnableOllamaPull",
+        "UpdateSourceConditionValue": "True",
+        "SkipOnFailure": true
     }
 ]
