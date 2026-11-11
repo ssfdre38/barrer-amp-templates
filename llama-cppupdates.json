@@ -3,7 +3,8 @@
         "UpdateStageName": "llama.cpp Release Download (Windows)",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "GithubRelease",
-        "UpdateSourceArgs": "ggerganov/llama.cpp",
+        "UpdateSourceArgs": "ggml-org/llama.cpp",
+        "UpdateSourceData": "*bin-win-cpu-x64.zip",
         "UpdateSourceTarget": "{{$FullRootDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
@@ -14,12 +15,21 @@
         "UpdateStageName": "llama.cpp Release Download (Linux)",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "GithubRelease",
-        "UpdateSourceArgs": "ggerganov/llama.cpp",
+        "UpdateSourceArgs": "ggml-org/llama.cpp",
+        "UpdateSourceData": "*bin-ubuntu-x64.tar.gz",
         "UpdateSourceTarget": "{{$FullRootDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
         "DeleteAfterExtract": true,
         "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Setup Linux Binaries",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"if [ -d \\\"{{$FullRootDir}}\\\"llama-b* ]; then cp -rn \\\"{{$FullRootDir}}\\\"llama-b*/* \\\"{{$FullRootDir}}\\\"; chmod +x \\\"{{$FullRootDir}}\\\"llama-server; fi; if [ -f /usr/lib/x86_64-linux-gnu/libgomp.so.1 ] && [ ! -f \\\"{{$FullRootDir}}\\\"libgomp.so.1 ]; then cp -a /usr/lib/x86_64-linux-gnu/libgomp.so.1* \\\"{{$FullRootDir}}\\\"; fi\"",
+        "SkipOnFailure": true
     },
     {
         "UpdateStageName": "Create Models Directory",

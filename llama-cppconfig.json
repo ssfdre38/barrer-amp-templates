@@ -9,13 +9,14 @@
         "InputType": "enum",
         "ParamFieldName": "ModelSource",
         "IncludeInCommandLine": false,
-        "DefaultValue": "--hf-repo ssfdre38/gemma4-turbo-gguf:IQ4_XS",
+        "DefaultValue": "--hf-repo ssfdre38/gemma4-turbo-gguf --hf-file gemma4-31b-iq4xs-turbo.gguf",
         "EnumValues": {
-            "--hf-repo ssfdre38/gemma4-turbo-gguf:IQ4_XS": "Gemma 4 Turbo [31B IQ4_XS] - ssfdre38 (Recommended)",
+            "--hf-repo ssfdre38/gemma4-turbo-gguf --hf-file gemma4-31b-iq4xs-turbo.gguf": "Gemma 4 Turbo [31B IQ4_XS] - ssfdre38 (Recommended)",
+            "--hf-repo ssfdre38/gemma4-turbo-gguf --hf-file gemma4-e4b-iq4xs-turbo.gguf": "Gemma 4 Turbo [E4B IQ4_XS] - ssfdre38 (Standard)",
+            "--hf-repo ssfdre38/gemma4-turbo-gguf --hf-file gemma4-e2b-iq4xs-turbo.gguf": "Gemma 4 Turbo [E2B IQ4_XS] - ssfdre38 (Ultra-Light)",
             "--hf-repo ssfdre38/gemma4-nano-gguf:IQ4_XS": "Gemma 4 Nano [IQ4_XS] - ssfdre38",
-            "--hf-repo Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:q4_k_m": "Qwen 2.5 Coder 7B (Q4_K_M)",
-            "--hf-repo unsloth/Llama-3.2-3B-Instruct-GGUF:q4_k_m": "Llama 3.2 3B Instruct (Q4_K_M)",
-            "--hf-repo bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M": "Llama 3.1 8B Instruct (Q4_K_M)",
+            "--hf-repo Qwen/Qwen2.5-Coder-7B-Instruct-GGUF --hf-file qwen2.5-coder-7b-instruct-q4_k_m.gguf": "Qwen 2.5 Coder 7B (Q4_K_M)",
+            "--hf-repo unsloth/Llama-3.2-3B-Instruct-GGUF --hf-file Llama-3.2-3B-Instruct-Q4_K_M.gguf": "Llama 3.2 3B Instruct (Q4_K_M)",
             "-m models/model.gguf": "Direct Ollama Model / Local (models/model.gguf)",
             "{{CustomModelFlag}} \"{{CustomModelTarget}}\"": "Custom Model (Use Custom Fields Below)"
         }
