@@ -2,34 +2,18 @@
     {
         "UpdateStageName": "llama.cpp Release Download (Windows)",
         "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "GithubRelease",
-        "UpdateSourceArgs": "ggml-org/llama.cpp",
-        "UpdateSourceData": "*bin-win-cpu-x64.zip",
-        "UpdateSourceTarget": "{{$FullRootDir}}",
-        "UnzipUpdateSource": true,
-        "OverwriteExistingFiles": true,
-        "DeleteAfterExtract": true,
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; cd '{{$FullRootDir}}'; try { $TAG = (Invoke-RestMethod -Uri 'https://github.com/ggml-org/llama.cpp/releases/download/v0.9.0/nightly-tag.txt').Trim() } catch { $TAG = 'b12277' }; if (-not $TAG -or $TAG.Length -lt 2) { $TAG = 'b12277' }; $ZIP = \\\"llama-$TAG-bin-win-cpu-x64.zip\\\"; Write-Host \\\"Downloading llama.cpp $TAG...\\\"; Invoke-WebRequest -Uri \\\"https://github.com/ggml-org/llama.cpp/releases/download/$TAG/$ZIP\\\" -OutFile $ZIP; Expand-Archive -Path $ZIP -DestinationPath . -Force; Remove-Item $ZIP -Force\"",
         "SkipOnFailure": false
     },
     {
         "UpdateStageName": "llama.cpp Release Download (Linux)",
         "UpdateSourcePlatform": "Linux",
-        "UpdateSource": "GithubRelease",
-        "UpdateSourceArgs": "ggml-org/llama.cpp",
-        "UpdateSourceData": "*bin-ubuntu-x64.tar.gz",
-        "UpdateSourceTarget": "{{$FullRootDir}}",
-        "UnzipUpdateSource": true,
-        "OverwriteExistingFiles": true,
-        "DeleteAfterExtract": true,
-        "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "Setup Linux Binaries",
-        "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"if [ -d \\\"{{$FullRootDir}}\\\"llama-b* ]; then cp -rn \\\"{{$FullRootDir}}\\\"llama-b*/* \\\"{{$FullRootDir}}\\\"; chmod +x \\\"{{$FullRootDir}}\\\"llama-server; fi; if [ -f /usr/lib/x86_64-linux-gnu/libgomp.so.1 ] && [ ! -f \\\"{{$FullRootDir}}\\\"libgomp.so.1 ]; then cp -a /usr/lib/x86_64-linux-gnu/libgomp.so.1* \\\"{{$FullRootDir}}\\\"; fi\"",
-        "SkipOnFailure": true
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}\\\"; TAG=$(curl -sL https://github.com/ggml-org/llama.cpp/releases/download/v0.9.0/nightly-tag.txt 2>/dev/null | tr -d '\\r\\n[:space:]'); if [ -z \\\"$TAG\\\" ] || [ ${#TAG} -lt 2 ]; then TAG=\\\"b12277\\\"; fi; TAR=\\\"llama-${TAG}-bin-ubuntu-x64.tar.gz\\\"; echo \\\"Downloading llama.cpp release $TAG...\\\"; curl -sL \\\"https://github.com/ggml-org/llama.cpp/releases/download/${TAG}/${TAR}\\\" -o \\\"${TAR}\\\"; if [ -f \\\"${TAR}\\\" ] && [ -s \\\"${TAR}\\\" ]; then tar -xzf \\\"${TAR}\\\" --strip-components=1 2>/dev/null || tar -xzf \\\"${TAR}\\\"; rm -f \\\"${TAR}\\\"; fi; if [ -d llama-b* ]; then cp -rn llama-b*/* . 2>/dev/null || true; rm -rf llama-b*; fi; chmod +x llama-server llama-cli llama-bench 2>/dev/null || true; if [ -f /usr/lib/x86_64-linux-gnu/libgomp.so.1 ] && [ ! -f libgomp.so.1 ]; then cp -a /usr/lib/x86_64-linux-gnu/libgomp.so.1* . 2>/dev/null || true; fi\"",
+        "SkipOnFailure": false
     },
     {
         "UpdateStageName": "Create Models Directory",
@@ -37,6 +21,30 @@
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullRootDir}}models",
         "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Fetch Ollama Pull Script (Linux)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://raw.githubusercontent.com/ssfdre38/barrer-amp-templates/main/pull-ollama.sh",
+        "UpdateSourceArgs": "pull-ollama.sh",
+        "UpdateSourceTarget": "{{$FullRootDir}}",
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "EnableOllamaPull",
+        "UpdateSourceConditionValue": "True",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "Fetch Ollama Pull Script (Windows)",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://raw.githubusercontent.com/ssfdre38/barrer-amp-templates/main/pull-ollama.ps1",
+        "UpdateSourceArgs": "pull-ollama.ps1",
+        "UpdateSourceTarget": "{{$FullRootDir}}",
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "EnableOllamaPull",
+        "UpdateSourceConditionValue": "True",
+        "SkipOnFailure": true
     },
     {
         "UpdateStageName": "Ollama Model Pull (Windows)",
